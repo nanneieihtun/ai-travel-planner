@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "xyGuVVc+6SU=",
+  "success": true,
+  "projectFilePath": "C:\\myDocumentation\\_projects\\AITravelPlanner\\backend\\TravelPlanner.Api\\TravelPlanner.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\naneiei.htun_veladx\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.7\\microsoft.aspnetcore.openapi.9.0.7.nupkg.sha512",
+    "C:\\Users\\naneiei.htun_veladx\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
