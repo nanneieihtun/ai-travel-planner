@@ -1,0 +1,42 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# ASP.NET
+appsettings.Development.json
+
+# React
+dist/
+
+# Coverage
+coverage/
+
+# Entity Framework local database
+*.db
+*.db-shm
+*.db-wal
