@@ -10,10 +10,12 @@ namespace TravelPlanner.Api.Controllers;
 public class TripController : ControllerBase
 {
     private readonly ITripRepository _repository;
+    private readonly ITripService _tripService;
 
-    public TripController(ITripRepository repository)
+    public TripController(ITripRepository repository, ITripService tripService)
     {
         _repository = repository;
+        _tripService = tripService;
     }
 
     [HttpGet]
@@ -48,6 +50,27 @@ public class TripController : ControllerBase
             return NotFound();
         }
         return Ok(trip);
+    }
+    [HttpPut("{id}")]
+public async Task<IActionResult> UpdateTrip(Guid id, UpdateTripRequest request)
+{
+    var trip = await _tripService.UpdateAsync(id, request);
+
+    if (trip == null)
+        return NotFound();
+
+    return Ok(trip);
+}
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTrip(Guid id)
+    {
+        var success = await _tripService.DeleteAsync(id);
+
+        if (!success)
+            return NotFound();
+
+        return NoContent();
     }
 }
 

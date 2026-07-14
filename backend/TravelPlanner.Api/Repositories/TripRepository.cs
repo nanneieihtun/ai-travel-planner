@@ -31,4 +31,34 @@ public class TripRepository : ITripRepository
 
         return trip;
     }
+    
+public async Task<Trip?> UpdateAsync(Guid id, Trip updatedTrip)
+{
+    var trip = await _context.Trips.FindAsync(id);
+
+    if (trip == null)
+        return null;
+
+    trip.Destination = updatedTrip.Destination;
+    trip.StartDate = updatedTrip.StartDate;
+    trip.EndDate = updatedTrip.EndDate;
+    trip.Budget = updatedTrip.Budget;
+
+    await _context.SaveChangesAsync();
+
+    return trip;
+}
+
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        var trip = await _context.Trips.FindAsync(id);
+
+        if (trip == null)
+            return false;
+
+        _context.Trips.Remove(trip);
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
 }
