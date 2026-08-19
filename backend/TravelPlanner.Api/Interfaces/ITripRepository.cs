@@ -11,4 +11,6 @@ public interface ITripRepository
     Task<Trip> CreateAsync(Trip trip);
     Task<Trip?> UpdateAsync(Guid id, Trip trip);
     Task<bool> DeleteAsync(Guid id);
+    
+
 }

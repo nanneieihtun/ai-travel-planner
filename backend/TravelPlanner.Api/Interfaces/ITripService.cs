@@ -10,4 +10,7 @@ public interface ITripService
     Task<Trip> GetByIdAsync(Guid id);
     Task<Trip?> UpdateAsync(Guid id, UpdateTripRequest request);
     Task<bool> DeleteAsync(Guid id);
+    Task<ItineraryResponse?> GenerateItineraryAsync(
+        int destinationId,
+        int days);
 }
