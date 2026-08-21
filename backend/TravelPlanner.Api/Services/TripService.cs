@@ -23,25 +23,28 @@ public class TripService : ITripService
         return await _repository.GetAllAsync();
     }
 
-    public async Task<Trip> CreateAsync(CreateTripRequest request)
+   public async Task<Trip> CreateAsync(CreateTripRequest request)
+{
+    if (request.EndDate < request.StartDate)
+        throw new ArgumentException("End date must be after start date.");
+
+    if (request.Budget < 0)
+        throw new ArgumentException("Budget cannot be negative.");
+
+    if (request.Days < 1 || request.Days > 10)
+        throw new ArgumentException("Trip must be between 1 and 10 days.");
+
+    var trip = new Trip
     {
-        if (request.EndDate < request.StartDate)
-            throw new ArgumentException("End date must be after start date.");
+        Destination = request.Destination,
+        StartDate = request.StartDate,
+        EndDate = request.EndDate,
+        Budget = request.Budget,
+        Days = request.Days
+    };
 
-        if (request.Budget < 0)
-            throw new ArgumentException("Budget cannot be negative.");
-
-        var trip = new Trip
-        {
-            Destination = request.Destination,
-            StartDate = request.StartDate,
-            EndDate = request.EndDate,
-            Budget = request.Budget
-        };
-
-        return await _repository.CreateAsync(trip);
-    }
-
+    return await _repository.CreateAsync(trip);
+}
     public async Task<Trip> GetByIdAsync(Guid id)
     {
         return await _repository.GetByIdAsync(id);

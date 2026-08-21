@@ -5,7 +5,15 @@ import "./TripList.css";
 
 const durations = [3, 4, 5, 6, 7, 8, 9, 10];
 
-export default function TripList() {
+interface Props {
+  onMyTrips: () => void;
+  onSelectDestination: (id: number) => void;
+}
+
+export default function TripList({
+  onMyTrips,
+  onSelectDestination,
+}: Props) {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedDays, setSelectedDays] = useState<number | null>(null);
@@ -45,6 +53,30 @@ export default function TripList() {
 
   return (
     <div className="travel-page">
+
+      {/* NAVBAR */}
+
+      <nav className="navbar">
+
+        <div className="logo">
+          <span>✈</span>
+          AI Travel Planner
+        </div>
+
+        <div className="nav-links">
+
+          <button className="active-nav">
+            Explore
+          </button>
+
+          <button onClick={onMyTrips}>
+            My Trips
+          </button>
+
+        </div>
+
+      </nav>
+
 
       {/* HERO */}
 
@@ -134,7 +166,11 @@ export default function TripList() {
           <div className="duration-filter">
 
             <button
-              className={selectedDays === null ? "active" : ""}
+              className={
+                selectedDays === null
+                  ? "active"
+                  : ""
+              }
               onClick={() => setSelectedDays(null)}
             >
               Any
@@ -167,6 +203,12 @@ export default function TripList() {
             Discovering destinations...
           </div>
 
+        ) : destinations.length === 0 ? (
+
+          <div className="loading">
+            No destinations found for this filter.
+          </div>
+
         ) : (
 
           <div className="destination-grid">
@@ -190,7 +232,12 @@ export default function TripList() {
                     {destination.country}
                   </span>
 
-                  <button className="heart">
+                  <button
+                    className="heart"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                    }}
+                  >
                     ♡
                   </button>
 
@@ -214,7 +261,13 @@ export default function TripList() {
                       {destination.maxDays} days
                     </span>
 
-                    <button>
+                    <button
+                      onClick={() =>
+                        onSelectDestination(
+                          destination.id
+                        )
+                      }
+                    >
                       Explore →
                     </button>
 

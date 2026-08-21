@@ -4,6 +4,7 @@ public class Trip
 {
     public Guid Id { get; set; }
 
+    public int DestinationId { get; set; }
     public string Destination { get; set; } = string.Empty;
 
     public DateOnly StartDate { get; set; }
@@ -11,6 +12,6 @@ public class Trip
     public DateOnly EndDate { get; set; }
 
     public decimal Budget { get; set; }
-
+    public int Days { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

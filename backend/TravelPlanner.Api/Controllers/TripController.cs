@@ -25,21 +25,13 @@ public class TripController : ControllerBase
         return Ok(trips);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateTrip(CreateTripRequest request)
-    {
-        var trip = new Trip
-        {
-            Destination = request.Destination,
-            StartDate = request.StartDate,
-            EndDate = request.EndDate,
-            Budget = request.Budget
-        };
+[HttpPost]
+public async Task<IActionResult> CreateTrip(CreateTripRequest request)
+{
+    var trip = await _tripService.CreateAsync(request);
 
-        await _repository.CreateAsync(trip);
-
-        return Ok(trip);
-    }
+    return Ok(trip);
+}
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetTrip(Guid id)
