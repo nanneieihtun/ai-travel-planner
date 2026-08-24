@@ -10,10 +10,7 @@ interface Props {
   onSelectDestination: (id: number) => void;
 }
 
-export default function TripList({
-  onMyTrips,
-  onSelectDestination,
-}: Props) {
+export default function TripList({ onMyTrips, onSelectDestination }: Props) {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedDays, setSelectedDays] = useState<number | null>(null);
@@ -29,7 +26,7 @@ export default function TripList({
 
       const data = await getDestinations(
         selectedCountry || undefined,
-        selectedDays || undefined
+        selectedDays || undefined,
       );
 
       setDestinations(data);
@@ -53,42 +50,28 @@ export default function TripList({
 
   return (
     <div className="travel-page">
-
       {/* NAVBAR */}
 
       <nav className="navbar">
-
         <div className="logo">
           <span>✈</span>
           AI Travel Planner
         </div>
 
         <div className="nav-links">
+          <button className="active-nav">Explore</button>
 
-          <button className="active-nav">
-            Explore
-          </button>
-
-          <button onClick={onMyTrips}>
-            My Trips
-          </button>
-
+          <button onClick={onMyTrips}>My Trips</button>
         </div>
-
       </nav>
-
 
       {/* HERO */}
 
       <section className="hero-section">
-
         <div className="hero-overlay" />
 
         <div className="hero-content">
-
-          <span className="hero-label">
-            ✦ AI TRAVEL PLANNER
-          </span>
+          <span className="hero-label">✦ AI TRAVEL PLANNER</span>
 
           <h1>
             Where will you
@@ -97,38 +80,26 @@ export default function TripList({
           </h1>
 
           <p>
-            Discover beautiful destinations and let AI create
-            the perfect itinerary for your trip.
+            Discover beautiful destinations and let AI create the perfect
+            itinerary for your trip.
           </p>
-
         </div>
-
       </section>
-
 
       {/* FILTER AREA */}
 
       <section className="explore-section">
-
         <div className="section-header">
-
           <div>
-            <span className="eyebrow">
-              EXPLORE
-            </span>
+            <span className="eyebrow">EXPLORE</span>
 
-            <h2>
-              Find your next escape
-            </h2>
+            <h2>Find your next escape</h2>
           </div>
-
         </div>
-
 
         {/* COUNTRY FILTER */}
 
         <div className="country-filter">
-
           <button
             className={!selectedCountry ? "active" : ""}
             onClick={() => setSelectedCountry("")}
@@ -139,38 +110,22 @@ export default function TripList({
           {countries.map((country) => (
             <button
               key={country}
-              className={
-                selectedCountry === country
-                  ? "active"
-                  : ""
-              }
-              onClick={() =>
-                setSelectedCountry(country)
-              }
+              className={selectedCountry === country ? "active" : ""}
+              onClick={() => setSelectedCountry(country)}
             >
               {country}
             </button>
           ))}
-
         </div>
-
 
         {/* DURATION */}
 
         <div className="duration-section">
-
-          <span className="duration-label">
-            How long is your trip?
-          </span>
+          <span className="duration-label">How long is your trip?</span>
 
           <div className="duration-filter">
-
             <button
-              className={
-                selectedDays === null
-                  ? "active"
-                  : ""
-              }
+              className={selectedDays === null ? "active" : ""}
               onClick={() => setSelectedDays(null)}
             >
               Any
@@ -179,57 +134,41 @@ export default function TripList({
             {durations.map((days) => (
               <button
                 key={days}
-                className={
-                  selectedDays === days
-                    ? "active"
-                    : ""
-                }
+                className={selectedDays === days ? "active" : ""}
                 onClick={() => setSelectedDays(days)}
               >
                 {days} days
               </button>
             ))}
-
           </div>
-
         </div>
-
 
         {/* DESTINATION GRID */}
 
         {loading ? (
-
-          <div className="loading">
-            Discovering destinations...
-          </div>
-
+          <div className="loading">Discovering destinations...</div>
         ) : destinations.length === 0 ? (
-
-          <div className="loading">
-            No destinations found for this filter.
-          </div>
-
+          <div className="loading">No destinations found for this filter.</div>
         ) : (
-
           <div className="destination-grid">
-
             {destinations.map((destination) => (
-
               <article
                 className="destination-card"
                 key={destination.id}
+                onClick={() => onSelectDestination(destination.id)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    onSelectDestination(destination.id);
+                  }
+                }}
               >
-
                 <div className="card-image">
-
-                  <img
-                    src={destination.imageUrl}
-                    alt={destination.city}
-                  />
+                  <img src={destination.imageUrl} alt={destination.city} />
 
                   <span className="country-badge">
-                    {destination.flag}{" "}
-                    {destination.country}
+                    {destination.flag} {destination.country}
                   </span>
 
                   <button
@@ -241,50 +180,36 @@ export default function TripList({
                     ♡
                   </button>
 
+                  {/* Optional hover button */}
+                  <div className="image-explore">Explore →</div>
                 </div>
 
-
                 <div className="card-content">
+                  <h3>{destination.city}</h3>
 
-                  <h3>
-                    {destination.city}
-                  </h3>
-
-                  <p>
-                    {destination.description}
-                  </p>
+                  <p>{destination.description}</p>
 
                   <div className="card-footer">
-
                     <span>
-                      ✦ {destination.minDays}–
-                      {destination.maxDays} days
+                      ✦ {destination.minDays}–{destination.maxDays} days
                     </span>
 
                     <button
-                      onClick={() =>
-                        onSelectDestination(
-                          destination.id
-                        )
-                      }
+                      onClick={(event) => {
+                        event.stopPropagation();
+
+                        onSelectDestination(destination.id);
+                      }}
                     >
                       Explore →
                     </button>
-
                   </div>
-
                 </div>
-
               </article>
-
             ))}
-
           </div>
-
         )}
-
       </section>
-
     </div>
   );
 }

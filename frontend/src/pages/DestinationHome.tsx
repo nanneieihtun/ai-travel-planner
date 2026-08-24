@@ -23,7 +23,7 @@ export default function DestinationHome({
 
         <div className="nav-links">
           <button>Explore</button>
-           <button onClick={onMyTrips}> My Trips </button>
+          <button onClick={onMyTrips}> My Trips </button>
         </div>
       </nav>
 
@@ -38,8 +38,8 @@ export default function DestinationHome({
           </h1>
 
           <p className="hero-description">
-            Discover beautiful destinations and let AI create a trip
-            that fits your time, interests and travel style.
+            Discover beautiful destinations and let AI create a trip that fits
+            your time, interests and travel style.
           </p>
 
           <div className="planner-box">
@@ -61,9 +61,7 @@ export default function DestinationHome({
               </div>
             </div>
 
-            <button className="plan-button">
-              Plan my trip →
-            </button>
+            <button className="plan-button">Plan my trip →</button>
           </div>
         </div>
       </section>
@@ -104,34 +102,54 @@ export default function DestinationHome({
               className="destination-card"
               key={destination.id}
               onClick={() => onSelectDestination(destination.id)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  onSelectDestination(destination.id);
+                }
+              }}
             >
-              <div className="destination-image">
-                <img
-                  src={destination.imageUrl}
-                  alt={destination.city}
-                />
-
-                <div className="image-overlay" />
+              <div className="card-image">
+                <img src={destination.imageUrl} alt={destination.city} />
 
                 <span className="country-badge">
                   {destination.flag} {destination.country}
                 </span>
 
-                <button className="heart-button">♡</button>
+                <button
+                  className="heart"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                  }}
+                >
+                  ♡
+                </button>
 
-                <div className="destination-title">
-                  <h3>{destination.city}</h3>
-                  <p>{destination.minDays}–{destination.maxDays} days</p>
-                </div>
+                {/* Optional hover button */}
+                <div className="image-explore">Explore →</div>
               </div>
 
-              <div className="destination-info">
+              <div className="card-content">
+                <h3>{destination.city}</h3>
+
                 <p>{destination.description}</p>
 
-                <button>
-                  Explore destination
-                  <span>→</span>
-                </button>
+                <div className="card-footer">
+                  <span>
+                    ✦ {destination.minDays}–{destination.maxDays} days
+                  </span>
+
+                  <button
+                    onClick={(event) => {
+                      event.stopPropagation();
+
+                      onSelectDestination(destination.id);
+                    }}
+                  >
+                    Explore →
+                  </button>
+                </div>
               </div>
             </article>
           ))}
