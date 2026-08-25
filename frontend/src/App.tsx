@@ -1,16 +1,14 @@
 import { useState } from "react";
 import "./App.css";
-
 import TripList from "./pages/TripList";
 import MyTrips from "./pages/MyTrips";
+import DestinationHome from "./pages/DestinationHome";
 import Itinerary from "./pages/Itinerary";
 import { getDestinations } from "./api/destinationApi";
 
 type Page = "explore" | "trips" | "itinerary";
-
 function App() {
   const [page, setPage] = useState<Page>("explore");
-
   const [selectedDestination, setSelectedDestination] = useState<number | null>(
     null,
   );
@@ -36,7 +34,16 @@ function App() {
       console.error("Failed to find destination:", error);
     }
   }
-  // My Trips
+  if (selectedDestination !== null) {
+    return (
+      <Itinerary
+        destinationId={selectedDestination}
+        days={days}
+        onBack={() => setSelectedDestination(null)}
+        onDaysChange={setDays}
+      />
+    );
+  }
   if (page === "trips") {
     return (
       <MyTrips
@@ -46,27 +53,14 @@ function App() {
     );
   }
 
-  // Itinerary
-  if (page === "itinerary" && selectedDestination !== null) {
-    return (
-      <Itinerary
-        destinationId={selectedDestination}
-        days={days}
-        onDaysChange={setDays}
-        onBack={() => setPage("explore")}
-      />
-    );
-  }
-
-  // Explore
   return (
-    <TripList
+    <DestinationHome
+      days={days}
+      onDaysChange={setDays}
       onMyTrips={() => setPage("trips")}
-      onSelectDestination={(id) => {
-        setSelectedDestination(id);
-        setPage("itinerary");
-      }}
+      onSelectDestination={setSelectedDestination}
     />
+    
   );
 }
 

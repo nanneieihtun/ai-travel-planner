@@ -331,43 +331,43 @@ public static class TravelAttractionSeedData
             "Viewpoint",
             "The classic Hong Kong skyline viewpoint.",
             10, 180,
-            "https://images.unsplash.com/photo-1536599018102-9f803c7f1f2b");
+            "https://images.unsplash.com/photo-1577871598838-a543ee47cd79");
 
         Add(list, d, "Victoria Harbour", "Tsim Sha Tsui",
             "Viewpoint",
             "The iconic harbour separating Hong Kong Island and Kowloon.",
             10, 120,
-            "https://images.unsplash.com/photo-1536599018102-9f803c7f1f2b");
+            "https://images.unsplash.com/photo-1596295426983-c98ba78de039");
 
         Add(list, d, "Tsim Sha Tsui", "Kowloon",
             "Shopping",
             "A lively waterfront district packed with shopping and restaurants.",
             9, 180,
-            "https://images.unsplash.com/photo-1536599018102-9f803c7f1f2b");
+            "https://images.unsplash.com/photo-1596295426983-c98ba78de039");
 
         Add(list, d, "Mong Kok", "Kowloon",
             "Shopping",
             "One of Hong Kong's busiest neighbourhoods with markets and street food.",
             9, 180,
-            "https://images.unsplash.com/photo-1536599018102-9f803c7f1f2b");
+            "https://images.unsplash.com/photo-1596295426983-c98ba78de039");
 
         Add(list, d, "Temple Street Night Market", "Jordan",
             "Food",
             "A classic Hong Kong evening market.",
             8, 120,
-            "https://images.unsplash.com/photo-1536599018102-9f803c7f1f2b");
+            "https://images.unsplash.com/photo-1596295426983-c98ba78de039");
 
         Add(list, d, "Lantau Island", "Lantau",
             "Nature",
             "A slower side of Hong Kong featuring mountains, villages and the Big Buddha.",
             9, 300,
-            "https://images.unsplash.com/photo-1536599018102-9f803c7f1f2b");
+            "https://images.unsplash.com/photo-1596295426983-c98ba78de039");
 
         Add(list, d, "Disneyland Hong Kong", "Lantau",
             "Entertainment",
             "A full-day theme park experience.",
             8, 480,
-            "https://images.unsplash.com/photo-1536599018102-9f803c7f1f2b");
+            "https://images.unsplash.com/photo-1596295426983-c98ba78de039");
     }
 
     private static void AddTaipei(

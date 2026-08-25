@@ -78,7 +78,7 @@ export const destinations: Destination[] = [
     description:
       "Skyline views, neon streets, islands, markets and incredible food.",
     imageUrl:
-      "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1596295426983-c98ba78de039",
     minDays: 3,
     maxDays: 10,
   },

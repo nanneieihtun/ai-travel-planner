@@ -73,7 +73,7 @@ public static class TravelSeedData
                 CountryCode = "HK",
                 Flag = "🇭🇰",
                 Description = "A spectacular combination of skyscrapers, food, shopping, mountains and islands.",
-                ImageUrl = "https://images.unsplash.com/photo-1536599018102-9f803c7f1f2b",
+                ImageUrl = "https://images.unsplash.com/photo-1596295426983-c98ba78de039",
                 MinDays = 3,
                 MaxDays = 10
             },
